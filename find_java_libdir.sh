@@ -23,11 +23,7 @@ main () {
   fi
 
   local jre_dir
-  if [[ "${java_version}" =~ (6|7|8) ]]; then
-    jre_dir="${java_home}/jre/lib"
-  else
-    jre_dir="${java_home}/lib"
-  fi
+  jre_dir="${java_home}/jre/lib"
 
   local lib_dir=""
   if [[ "${os}" == "linux" && ! "${java_version}" =~ (6|7|8) ]]; then
