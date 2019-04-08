@@ -26,10 +26,7 @@ main () {
   jre_dir="${java_home}/jre/lib"
 
   local lib_dir=""
-  if [[ "${os}" == "linux" && ! "${java_version}" =~ (6|7|8) ]]; then
-    # no arch on JDK 9+
-    lib_dir="${jre_dir}/server"
-  elif [[ "${os}" == "linux" && "${target_arch}" == "arm" ]]; then
+  if [[ "${os}" == "linux" && "${target_arch}" == "arm" ]]; then
     if [[ -d ${jre_dir}/arm/classic ]]; then lib_dir="${jre_dir}"/arm/classic; else lib_dir="${jre_dir}"/arm/server; fi
   elif [[ "${os}" == "linux" && "${target_arch}" == "ia32" ]]; then
     if [[ -d ${jre_dir}/i386/classic ]]; then lib_dir="${jre_dir}"/i386/classic; else lib_dir="${jre_dir}"/i386/server; fi
@@ -43,12 +40,10 @@ main () {
   elif [[ "${os}" == "mac" ]]; then
     lib_dir="${jre_dir}/server"
   else
-    local arch
-    if [[ "${target_arch}" =~ (32|386) ]]; then
-        arch=i386
-    else
-        arch=amd64
-    fi
+    local arch    
+   
+    arch=amd64
+   
     if [[ "${os}" == "solaris" ]]; then
       lib_dir="${jre_dir}/${arch}/server"
     elif [[ "${os}" == "freebsd" ]]; then
